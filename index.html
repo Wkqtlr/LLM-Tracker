@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ONE EYE · 내장 AI 테스트</title>
+  <style>
+    :root { font-family: Pretendard, system-ui, sans-serif; color: #191f28; background: #f5f6f8; }
+    * { box-sizing: border-box; }
+    main { max-width: 760px; margin: 48px auto; padding: 0 16px; }
+    section { padding: 24px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; }
+    h1 { font-size: 32px; line-height: 1.3; }
+    p { line-height: 1.6; }
+    label { display: block; margin: 24px 0 8px; font-weight: 600; }
+    input, textarea { width: 100%; padding: 12px; border: 1px solid #64748b; border-radius: 8px; font: inherit; }
+    textarea { min-height: 140px; resize: vertical; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    button { min-height: 44px; padding: 10px 16px; border: 1px solid #2563eb; border-radius: 8px; background: #2563eb; color: #fff; font: inherit; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    button:disabled { opacity: .6; cursor: wait; }
+    :focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
+    #status, #diagnosis { overflow-wrap: anywhere; }
+    #status[data-error="true"] { color: #b91c1c; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 16px; background: #f5f6f8; border-radius: 8px; line-height: 1.6; }
+    @media (max-width: 767px) { main { margin-top: 24px; } h1 { font-size: 24px; } section { padding: 16px; } }
+  </style>
+  <script src="translator-ko.js" defer></script>
+  <script src="ai.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>ONE EYE · 내장 AI 테스트</h1>
+    <p>한국어 글을 영어로 번역해 AI로 할인 여부를 판단하고, 판단 이유를 한국어로 보여줍니다.</p>
+    <section aria-label="번역 및 AI 판단">
+      <p>Chrome의 내장 AI API를 지원하는 환경에서 localhost 또는 HTTPS로 실행하세요. 처음 실행할 때 모델 다운로드가 필요할 수 있습니다.</p>
+      <p id="diagnosis" role="status">내장 AI 상태 확인 중…</p>
+      <label for="interests">관심사 (쉼표로 구분)</label>
+      <input id="interests" value="캐논, 소니, 니콘, 후지, 카메라 액세서리">
+      <label for="input">번역하거나 판단할 글</label>
+      <textarea id="input" placeholder="상품 제목이나 할인 소식을 입력하세요."></textarea>
+      <div class="actions">
+        <button id="prepare" type="button">AI·번역 모델 준비</button>
+        <button id="translate" type="button">영어로 번역</button>
+        <button id="analyze" type="button">AI로 할인 판단</button>
+      </div>
+      <p id="status" role="status" aria-live="polite">실행할 기능을 선택하세요.</p>
+      <h2>결과</h2>
+      <pre id="result" aria-live="polite">아직 실행 결과가 없습니다.</pre>
+    </section>
+  </main>
+</body>
+</html>
